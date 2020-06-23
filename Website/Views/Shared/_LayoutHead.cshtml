@@ -1,0 +1,19 @@
+﻿<head>
+    <title>
+        @if (ViewBag.Title == null) {
+            @AppSettings.Value.AppName;
+        } else {
+            @ViewBag.Title @:- @AppSettings.Value.AppName
+        }
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="@AppSettings.Value.AppName" />
+    <meta name="robots" content="noodp" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="content-language" content="en" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="~/lib/bundle.min.css" asp-append-version="true" id="light-theme-link" disabled />
+    <link rel="stylesheet" href="~/lib/bundle-dark.min.css" asp-append-version="true" id="dark-theme-link" />
+</head>

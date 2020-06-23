@@ -1,0 +1,11 @@
+﻿@model StoreApp
+
+@if (Model.ReleaseDate != null && Model.ReleaseDate.IsComingSoon && Model.ReleaseDate.Date.HasValue) {
+    @:Avialable on @Html.DisplayFor(x => x.ReleaseDate.Date, "ShortDate")
+} else if (Model.ReleaseDate != null && Model.ReleaseDate.IsComingSoon) {
+    @:Coming Soon
+} else if (Model.ReleaseDate != null && Model.ReleaseDate.Date.HasValue) {
+    @:Released on @Html.DisplayFor(x => x.ReleaseDate.Date, "ShortDate")
+} else {
+    @:Unknown Release Date
+}

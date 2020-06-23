@@ -1,0 +1,19 @@
+﻿<footer class="container">
+    <hr />
+    <p class="text-center">
+        <environment include="Development">
+            <span class="text-danger font-weight-bold">Development Server</span> -
+        </environment>
+        <a href="@AppSettings.Value.CompanyHomepageUrl" target="_blank" rel="noopener noreferrer" display-for="@AppSettings.Value.CompanyName"></a>
+        <span title="Developed by Alex Tiller">
+            @AppSettings.Value.AppName
+            &copy; @DateTime.Now.Year -
+        </span>
+        <a asp-action="ReleaseNotes" asp-controller="Home" asp-area="">Version @ViewUtilities.GetWebsiteVersion()</a>
+
+        <div class="hidden">@Html.AntiForgeryToken()</div>
+        @if (TempData["message"] != null) {
+            <input type="hidden" id="tempDataMessage" value="@TempData["message"]" />
+        }
+    </p>
+</footer>

@@ -1,0 +1,14 @@
+﻿@model StoreApp
+@if (Model.IsFree) {
+    @:Free to play
+} else if (Model.ReleaseDate.IsComingSoon && Model.ReleaseDate.Date.HasValue) {
+    <span display-for="ReleaseDate.DateString"></span>
+} else if (Model.Pricing != null && Model.Pricing.IsOnSale) {
+    <span class="@(Model.Pricing.IsOnSale ? "line-through text-muted small" : "")" display-for="Pricing.InitialDisplay"></span>
+    <span display-for="Pricing.FinalDisplay"></span>
+    <span class="badge badge-success">
+        <span display-for="Pricing.DiscountPercentageDisplay"></span> Off
+    </span>
+} else if (Model.Pricing != null) {
+    <span display-for="Pricing.FinalDisplay"></span>
+}

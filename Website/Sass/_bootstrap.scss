@@ -1,0 +1,52 @@
+﻿///<reference path="_variablesShared.scss" />
+///<reference path="_variablesLight.scss" />
+///<reference path="_variablesDark.scss" />
+///<reference path="../node_modules/bootstrap/scss/_variables.scss" />
+
+
+// Import Bootstrap's Sass
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Adds a shadow to dropdown menus
+.dropdown-menu.show {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.gutter-5 {
+    > .col,
+    > [class*="col-"] {
+        padding-right: 2.5px;
+        padding-left: 2.5px;
+    }
+}
+
+// Placeholder style for IE 10 and 11
+.form-control:-ms-input-placeholder { /* IE 10+ */
+    color: $input-placeholder-color;
+}
+
+//Revert fieldsets to more default styling
+fieldset {
+    border: 1px solid $input-border-color;
+    padding-top: 0.4rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    padding-bottom: 0.8rem;
+
+    legend {
+        width: auto;
+        margin-left: .5rem;
+        font-size: 1rem;
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+        margin-bottom: 0;
+    }
+}
+
+//HACK This media query works to only apply the styles to IE10 and IE11
+@media all and (-ms-high-contrast:none), (-ms-high-contrast:active) {
+    // This fixes the missing padding on the bottom of inputs on IE
+    input.form-control {
+        padding-bottom: .58rem;
+    }
+}

@@ -1,0 +1,23 @@
+﻿@inherits Microsoft.VisualStudio.Web.CodeGeneration.Templating.RazorTemplateBase
+using MinecraftModInfoLib.Repository;
+using Website.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+
+namespace @Model.NamespaceName {
+    public class @Model.ClassName : CustomController {
+        private readonly UnitOfWork _uow;
+
+        public @(Model.ClassName)(UnitOfWork uow) {
+            _uow = uow;
+        }
+
+        public IActionResult Index() {
+            return View();
+        }
+    }
+}

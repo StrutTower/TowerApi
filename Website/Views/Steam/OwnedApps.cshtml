@@ -1,0 +1,26 @@
+﻿@model SteamUserDetails
+@{
+    ViewData["Title"] = "Owned Apps";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+@if (Model.OwnedApps != null && Model.OwnedApps.Any()) {
+<div class="row gutter-5">
+    @foreach (OwnedApp app in Model.OwnedApps.OrderByDescending(x => x.PlaytimeForever)) {
+        <a class="col-6 col-md-4 col-lg-3 pb-2 d-block" title="@app.Name"
+           asp-action="OwnedAppInfo" asp-route-steamid="@Model.User.ID" asp-route-appid="@app.AppID">
+            <img src="@app.StoreLogoUrl" class="img-fluid" />
+            @*@app.Name
+            @if (app.PlaytimeForever > 0) {
+                @: -
+                TimeSpan time = new TimeSpan(0, app.PlaytimeForever, 0);
+                @Math.Round(time.TotalHours) @: Hours
+            }*@
+        </a>
+    }
+</div>
+} else {
+    <h4>No Owned Apps Found</h4>
+}

@@ -1,0 +1,31 @@
+﻿@model SteamFriendListViewModel
+@{
+    ViewData["Title"] = "Friends";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<div class="row">
+    @foreach (SteamUser user in Model.Friends
+        .OrderByDescending(x => x.GameID.HasValue)
+        .ThenBy(x => x.PersonaState == PersonaState.Offline)
+        .ThenBy(x => x.PersonaState)) {
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-2">
+            <div class="media">
+                <img src="@user.AvatarMedium" 
+                     class="img-fluid mr-1 @ViewUtilities.GetSteamPersonaStateCss(user)" />
+                <div class="media-body">
+                    <h5 display-for="@user.PersonaName" class="mb-0"></h5>
+                    <div display-for="@user.PersonaState" class="text-faded"></div>
+                    <div>
+                        @if (user.GameID.HasValue) {
+                            @Model.AllApps[user.GameID.Value]
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

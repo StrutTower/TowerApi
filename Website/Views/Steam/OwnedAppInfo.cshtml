@@ -1,0 +1,80 @@
+﻿@model OwnedAppInfoViewModel
+@{
+    ViewData["Title"] = Model.SteamUserDetails.User.PersonaName + "'s stats for " + Model.OwnedApp.Name;
+    TimeSpan time = new TimeSpan(0, Model.OwnedApp.PlaytimeForever, 0);
+}
+
+<img src="@Model.OwnedApp.BackgroundImageUrl" style="position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:-1;" />
+
+<div class="row mb-3">
+    <div class="col-md-5">
+        <div class="display-4" display-for="OwnedApp.Name"></div>
+        <hr />
+        <h4 class="pl-4">
+            @Math.Round(time.TotalHours) <small>total hours played</small>
+        </h4>
+        @if (Model.UserAppPlaytime != null) {
+            <h4 class="pl-4">
+                @Math.Round(Model.UserAppPlaytime.PlayTime2Weeks.TotalHours) <small>hours played in the last two weeks</small>
+            </h4>
+        }
+        <h4 class="pl-4">
+            @Model.Stats.UserGameStats.Achievements.Count/@Model.Stats.GameStatsSchema.Achievements.Count Achievements
+        </h4>
+    </div>
+    <div class="col-md-7 text-right">
+        <img src="@Model.OwnedApp.StoreLogoUrl" class="img-fluid" />
+    </div>
+</div>
+
+<div class="row">
+    @if (Model.Stats != null && Model.Stats.GameStatsSchema != null && Model.Stats.GameStatsSchema.Achievements != null && Model.Stats.GameStatsSchema.Achievements.Any()) {
+        <div class="col-md-6 col-lg-8">
+            <h4>Achievements</h4>
+            <hr />
+            @foreach (var ach in Model.Stats.GameStatsSchema.Achievements.OrderByDescending(x => Model.Stats.UserGameStats.Achievements.ContainsKey(x.Name)).ThenBy(x => x.DisplayName)) {
+                bool acheived = false;
+                if (Model.Stats.UserGameStats.Achievements.ContainsKey(ach.Name)) {
+                    acheived = Model.Stats.UserGameStats.Achievements[ach.Name];
+                }
+                <div>
+                </div>
+                <div class="media">
+                    <img src="@(acheived ? ach.IconUrl : ach.IconGreyUrl)" class="mr-3 mb-2" style="width:64px;height:64px;" />
+                    <div class="media-body">
+                        <h5 class="mt-0">
+                            @Html.DisplayFor(x => ach.DisplayName)
+                            @if (acheived) {
+                                <em class="h6 text-faded">Acheived</em>
+                            }
+                        </h5>
+
+                        @Html.DisplayFor(x => ach.Description)
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    @if (Model.Stats.UserGameStats != null && Model.Stats.UserGameStats != null && Model.Stats.UserGameStats.Stats.Any()) {
+        <div class="col-md-6 col-lg-4">
+            <h4>Stats</h4>
+            <hr />
+            <table class="table-vertical">
+                @foreach (var stat in Model.Stats.GameStatsSchema.Stats) {
+                    string statValue = stat.DefaultValue.ToString();
+                    if (Model.Stats.UserGameStats.Stats.ContainsKey(stat.Name)) {
+                        statValue = Model.Stats.UserGameStats.Stats[stat.Name];
+                    }
+                    <tr>
+                        @if (string.IsNullOrWhiteSpace(stat.DisplayName)) {
+                            <th display-for="@stat.Name"></th>
+                        } else {
+                            <th display-for="@stat.DisplayName"></th>
+                        }
+                        <td display-for="@statValue"></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+</div>

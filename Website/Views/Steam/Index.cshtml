@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<div>
+    <form asp-action="ResolveVanityUrl" method="post">
+
+        <div class="form-group">
+            <label>Resolve Vanity URL</label>
+            <div class="input-group">
+                <input type="text" name="profileUrl" class="form-control" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="mdi mdi-magnify"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

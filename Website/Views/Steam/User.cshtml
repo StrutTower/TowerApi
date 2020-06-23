@@ -1,0 +1,66 @@
+﻿@model SteamUserDetails
+@{
+    ViewData["Title"] = Model.User.PersonaName;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="display-4 small-caps">
+            <img src="@Model.User.AvatarMedium" style="max-height:1em;" />
+            @ViewData["Title"]</div>
+    </div>
+    <div class="col-md-6">
+        <div class="display-4 text-md-right pl-5 small-caps">
+            Level <span style="display:inline-block; text-align:center; border:2px solid orange; border-radius:50%; height:1.4em;width:1.4em;" display-for="SteamLevel"></span>
+        </div>
+    </div>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-6 col-lg-8">
+
+        <div class="form-control-plaintext pl-3">
+            ID: @Html.DisplayFor(x => x.User.ID)
+        </div>
+        <div>
+            <a href="@Html.DisplayFor(x => x.User.ProfileUrl)" target="_blank" rel="nofollow noreferrer" class="btn btn-link">
+                @Html.DisplayFor(x => x.User.ProfileUrl)
+            </a>
+        </div>
+        <div>
+            <a asp-action="OwnedApps" asp-controller="Steam" asp-route-id="@Model.User.ID" class="btn btn-link">
+                View All @Model.OwnedAppCount Owned Apps
+            </a>
+        </div>
+
+        <div>
+            <a asp-action="Friends" asp-controller="Steam" asp-route-id="@Model.User.ID" class="btn btn-link">
+                View All Friends
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        @if (Model.LastPlayedGame != null) {
+        <h5>Last Played:</h5>
+        <img src="@Model.LastPlayedGame.HeaderImage" class="img-fluid" />
+        }
+    </div>
+</div>
+
+<hr />
+<h3>
+    <span class="small-caps">Wishlist</span>
+    <span class="h5">
+        @Model.WishlistCount items (@Model.WishlistOnSaleCount on sale)
+    </span>
+</h3>
+@if (Model.Wishlist != null) {
+<div class="row gutter-5" id="wishlist">
+    @foreach (StoreApp game in Model.Wishlist) {
+        <partial name="_WishlistItem" model="game" />
+    }
+</div>
+} else {
+    <h5>Unable to pull wishlist</h5>
+}

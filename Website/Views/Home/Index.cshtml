@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<fieldset>
+    <legend style="font-size:2rem;font-variant:small-caps;letter-spacing:2px;" class="small-caps">
+        <span class="mdi mdi-steam"></span>
+        Steam
+    </legend>
+    <a asp-action="Index" asp-controller="Steam" class="btn btn-link">
+        Index
+    </a>
+
+    <a asp-action="SteamUser" asp-controller="Steam" asp-route-id="76561197969858306" class="btn btn-link">StrutTower's Profile</a>
+</fieldset>

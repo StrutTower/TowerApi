@@ -1,0 +1,21 @@
+﻿html {
+    font-size: 14px;
+}
+
+@import "../node_modules/dark-bootstrap-theme/src/darkVariables";
+@import "variablesShared";
+@import "variablesDark";
+
+@import "bootstrap";
+@import "../node_modules/dark-bootstrap-theme/src/fixes";
+@import "../node_modules/dark-bootstrap-theme/src/customStyles/allCustomStyles";
+@import "../node_modules/dark-bootstrap-theme/src/plugins/allPlugins";
+
+
+@import "basicStyles";
+@import "forms";
+@import "select2";
+@import "tables";
+@import "icons";
+@import "images";
+@import "steam";
